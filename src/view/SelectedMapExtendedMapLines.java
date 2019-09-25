@@ -134,7 +134,7 @@ public class SelectedMapExtendedMapLines extends javax.swing.JFrame {
         getContentPane().add(dotPointer, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 265, 30, 30));
 
         mapLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mapLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/map3.png"))); // NOI18N
+        mapLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/map4.png"))); // NOI18N
         mapLabel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 mapLabelMouseDragged(evt);
