@@ -5,13 +5,16 @@
 ESP8266WebServer server(80);
 
 const char* deviceName = "NodeMCU Module";
-const char* ssid="Thinuli";
-const char* password="ck0713425680";
+const char* ssid="WiFi-Router";
+const char* password="T0JENMTJ7N2";
 
-IPAddress ip(192,168,1,114);
-IPAddress gateway(192,168,1,1);
+IPAddress ip(192,168,8,114);
+IPAddress gateway(192,168,8,1);
 IPAddress subnet(255,255,255,0);
 
+
+unsigned long timeNow=0;
+long period = 1000*5;
 /**********************************/
 int strengths [9]={00,00,00,00,00,00,00,00,00};
 int iteration=0;
@@ -169,12 +172,12 @@ void setup() {
 }
 
 void loop() {
-  for(int i=0;i<20;i++){
-  server.handleClient();
-  delay(1000);
-  }
-  //server.end();
-  ESP.deepSleep(30 * 1e6);
+   server.handleClient();
+   timeNow =millis();
+   while(millis()<(timeNow+period)){
+    server.handleClient();
+    }
+   ESP.deepSleep(10000000);
 }
      
     

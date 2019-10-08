@@ -15,8 +15,11 @@ IPAddress subnet(255,255,255,0);
 String Website,XML,Javascript;
 String data=(String)0;
 
+//////////////////////////
+
 unsigned long timeNow=0;
 long period = 1000*5;
+////////////////////////
 
 void javascriptContent(){
     Javascript ="<SCRIPT>\n";
@@ -63,7 +66,6 @@ void XMLcontent(){
   }
 
 void setup() {
-  // put your setup code here, to run once:
   WiFi.begin(ssid,password);
   WiFi.disconnect();
   WiFi.hostname(deviceName);
@@ -79,15 +81,39 @@ void setup() {
   while(Serial.available()<0){
      Serial.begin(9600);
   }
+
+  /*
+  for(int i=0;i<10;i++){
+    Serial.println("145652");
+    delay(300);
+  }*/
   
   String val=Serial.readString();
+  data = val;
+  
   while(val.length()<30){
     val=Serial.readString();
-    if(val.length()<40){
+    //if(val.length()<40){
       data=val;
-    }
+    //}
   }
 
+  /*
+  for(int i=0;i<500;i++){
+    val=Serial.readString();
+    data=val;
+    delay(10);
+  }
+  */
+  /*
+  for(int i=0;i<10;i++){
+    Serial.println("145652");
+    delay(100);
+  }*/
+  for(int i=0;i<10;i++){
+    Serial.println("1");
+    delay(100);
+  }
 ///////////////////////////////////////////////////////
 
   server.on("/",WebsiteContent);
@@ -100,9 +126,14 @@ void loop() {
    timeNow =millis();
    while(millis()<(timeNow+period)){
     server.handleClient();
-    }
+   }
+  
+  for(int i=0;i<3;i++){
+    Serial.println("111111");
+    delay(100);
+  }
    ESP.deepSleep(10000000);
 }
  
-     */
+     
     
