@@ -148,6 +148,8 @@ void handleData(){
 
 void setup() {
   // put your setup code here, to run once:
+  pinMode(4, OUTPUT);
+  digitalWrite(4, HIGH); 
   Serial.begin(9600);
   WiFi.begin(ssid,password);
   WiFi.disconnect();
@@ -164,6 +166,7 @@ void setup() {
   server.on("/xml",XMLcontent);
   server.on("/handle",handleData);
   server.begin();
+   
 }
 
 void loop() {
@@ -171,7 +174,10 @@ void loop() {
     while(millis()<(timeNow+period)){
       server.handleClient();
     }
-    ESP.deepSleep(5*1e6);
+    digitalWrite(4, LOW);   
+    delay(100);                      
+    digitalWrite(4, HIGH);     
+    ESP.deepSleep(10000000);
 }
      
     

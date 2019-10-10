@@ -1,12 +1,7 @@
-#include <SoftwareSerial.h>
 #include <ESP8266WiFi.h>
-//SoftwareSerial NodeMCU(D2,D3);
-//SoftwareSerial ESPModule(3,1);
 
 int strengths [9]={00,00,00,00,00,00,00,00,00};
 int iteration=10;
-//int c=0;
-//String cc[]={"1A,10,20,30,40,50,60,70,80,90,BB","2A,11,21,31,41,51,61,71,81,91,BB","3A,12,22,32,42,52,62,72,82,92,BB","4A,13,23,33,43,53,63,73,83,93,BB","5A,10,20,30,40,50,60,70,80,90,BB","6A,10,20,30,40,50,60,70,80,90,BB","7A,10,20,30,40,50,60,70,80,90,BB","8A,10,20,30,40,50,60,70,80,90,BB","9A,10,20,30,40,50,60,70,80,90,BB"};
 
 String ss;
 String comma ="," ;
@@ -19,24 +14,31 @@ String S6 = "**" ;
 String S7 = "**" ;
 String S8 = "**" ;
 String S9 = "**" ;
-///////////////////////
-String str;
-String str1;
-String str2;
-String str3;
-String str4;
-///////////////////////
+
+String str=" ";
+
+int LED=4;
 
 void setup() {
+  pinMode(LED,OUTPUT);
+  digitalWrite(LED,HIGH);
   Serial.begin(9600);
+
   
   WiFi.mode(WIFI_STA);
   WiFi.disconnect(); 
-  delay(100);
+  delay(50);
+  
+  digitalWrite(LED,LOW);
+  delay(20);
+  digitalWrite(LED,HIGH);
+
 }
 
-void loop() { 
+void loop() {  
   int n = WiFi.scanNetworks();
+  
+  
   if (n == 0){
     
   }
@@ -84,16 +86,18 @@ void loop() {
           S9 = String(strengths[8]);          
         }
       }
-       delay(10);      
     }
    }
   } 
+  
+  
   iteration=iteration+1;
   if(iteration==99){
     iteration=10;
-  } 
+  }
+  
   ss = (String)iteration+comma+S1+comma+S2+comma+S3+comma+S4+comma+S5+comma+S6+comma+S7+comma+S8+comma+S9+comma+"BB";
-  Serial.println(ss); 
+
   
   S1 = "**" ;
   S2 = "**" ;
@@ -104,23 +108,14 @@ void loop() {
   S7 = "**" ;
   S8 = "**" ;
   S9 = "**" ;
-  
- str=Serial.readString();
- str.trim();
+
  while(str.length()<100){
   str=Serial.readString();
   str.trim();
   Serial.println(ss); 
-  delay(100);  
+  delay(50);  
  }
 
- str1=Serial.readString();
- str1.trim();
- while(str1.length()<8){
-  str1=Serial.readString();
-  str1.trim();
-  Serial.println("sjjjjjjjjjjjjs"); 
-  }
-  
+
  ESP.deepSleep(10000000);
 }

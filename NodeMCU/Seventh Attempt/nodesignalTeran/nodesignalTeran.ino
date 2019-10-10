@@ -26,17 +26,28 @@ String str2;
 String str3;
 String str4;
 ///////////////////////
+int LED=4;
 
 void setup() {
+  pinMode(LED,OUTPUT);
   Serial.begin(9600);
   
   WiFi.mode(WIFI_STA);
   WiFi.disconnect(); 
   delay(100);
+  
+
+ digitalWrite(LED,HIGH);
+ delay(100);
+ digitalWrite(LED,LOW);
+ delay(100);
+ digitalWrite(LED,HIGH);
+ 
 }
 
-void loop() { 
+void loop() {  
   int n = WiFi.scanNetworks();
+   
   if (n == 0){
     
   }
@@ -93,7 +104,7 @@ void loop() {
     iteration=10;
   } 
   ss = (String)iteration+comma+S1+comma+S2+comma+S3+comma+S4+comma+S5+comma+S6+comma+S7+comma+S8+comma+S9+comma+"BB";
-  Serial.println(ss); 
+
   
   S1 = "**" ;
   S2 = "**" ;
@@ -104,7 +115,12 @@ void loop() {
   S7 = "**" ;
   S8 = "**" ;
   S9 = "**" ;
+
   
+
+ 
+ Serial.println(ss);
+ //digitalWrite(LED,LOW);
  str=Serial.readString();
  str.trim();
  while(str.length()<100){
@@ -119,8 +135,7 @@ void loop() {
  while(str1.length()<8){
   str1=Serial.readString();
   str1.trim();
-  Serial.println("sjjjjjjjjjjjjs"); 
   }
-  
+
  ESP.deepSleep(10000000);
 }
